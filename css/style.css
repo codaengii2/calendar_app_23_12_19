@@ -1,0 +1,405 @@
+body {
+  height: 100%;
+  /* overflow: hidden; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 960px) {
+  body {
+    height: 100vh;
+    flex-direction: column;
+  }
+}
+
+/* 전체 캘린더 틀 */
+#calendar {
+  width: 60vw;
+  margin-top: 50px;
+  border-radius: 30px;
+  overflow: hidden;
+  padding: 50px 20px;
+  height: 90vh;
+  background-color: #fff;
+}
+@media screen and (max-width: 960px) {
+  #calendar {
+    width: 90vw;
+    height: 75vh;
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #calendar {
+    width: 90vw;
+    height: 60vh;
+    padding: 20px;
+  }
+}
+
+/* 헤더 툴바 */
+.fc .fc-toolbar.fc-header-toolbar {
+  padding: 0 50px;
+}
+
+@media screen and (max-width: 960px) {
+  .fc .fc-toolbar.fc-header-toolbar {
+    padding: 0 20px;
+    margin-bottom: 10px;
+  }
+}
+
+/* 헤더툴바 버튼 */
+.fc .fc-button-primary {
+  background-color: transparent;
+  border: 0;
+  color: black;
+}
+
+/* 헤더툴바 버튼 호버 */
+.fc .fc-button-primary:hover {
+  background-color: transparent;
+  border: #fff;
+}
+
+/* 헤더 연도 글자 */
+@media screen and (max-width: 960px) {
+  .fc .fc-toolbar-title {
+    font-size: 20px;
+  }
+}
+
+/* 헤더 글자 */
+.fc .fc-button-primary span {
+  font-weight: 500;
+  font-size: 20px;
+  color: black;
+}
+
+.fc .fc-button-group {
+  border: #fff;
+}
+@media screen and (max-width: 600px) {
+  .fc .fc-button-group {
+    font-size: 14px;
+  }
+}
+.fc .fc-button-group:hover {
+  background-color: transparent;
+  /* border: #fff; */
+  background-color: rgb(199, 199, 199);
+  border-radius: 5px;
+}
+
+.fc .fc-button-group:hover span {
+  color: #000;
+}
+
+/* day별 글자 */
+.fc .fc-daygrid-day-top {
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 3px;
+  font-weight: 700;
+}
+
+/* day 및 요일 감싸는 container */
+.fc .fc-dayGridMonth-view {
+  background-color: rgb(255, 255, 255);
+}
+
+/* day border */
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: 0;
+}
+
+/* day container border */
+.fc-theme-standard .fc-scrollgrid {
+  border: 0;
+}
+
+/* event container */
+.fc-event {
+  cursor: pointer;
+  padding-left: 5px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* 구름 및 배경 */
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #b5e2f9;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.dog {
+  width: 80px;
+  position: absolute;
+  top: 3%;
+  right: 26%;
+}
+
+@media screen and (max-width: 960px) {
+  .dog {
+    right: 12%;
+    top: 11%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .dog {
+    right: 15%;
+    top: 19%;
+  }
+}
+
+.dog img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.cloud01 {
+  width: 100px;
+  position: absolute;
+  top: 2%;
+  right: -1%;
+}
+.cloud02 {
+  width: 100px;
+  position: absolute;
+  top: 30%;
+  left: -1%;
+}
+.cloud03 {
+  width: 180px;
+  position: absolute;
+  top: 60%;
+  right: -2%;
+}
+
+.cloud01 img,
+.cloud02 img,
+.cloud03 img {
+  width: 100%;
+  object-fit: cover;
+}
+
+/* 모달 */
+.modal {
+  /* border: 1px solid #ddd; */
+  border-radius: 30px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  z-index: 1;
+  display: none;
+  overflow: hidden;
+  box-shadow: 5px 5px 5px #ddd;
+}
+
+.modal_header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 73px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-bottom: 1px solid #ddd; */
+  background-color: rgb(237, 237, 237);
+}
+
+.con {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 30px 40px;
+}
+
+.text {
+  all: unset;
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  padding-left: 10px;
+}
+
+.title {
+  width: calc(100% - 10px);
+}
+
+.modal_bottom {
+  display: flex;
+  align-items: center;
+}
+
+.close {
+  width: 106px;
+  height: 37px;
+  border-radius: 37px;
+  /* border: 1px solid #000; */
+  background-color: rgb(237, 237, 237);
+  margin: 0 auto;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.addevent {
+  all: unset;
+  width: 106px;
+  height: 37px;
+  border-radius: 37px;
+  /* border: 1px solid #000; */
+  background-color: #b5e2f9;
+  margin: 0 auto;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+.fa-heart {
+  width: 30px;
+  color: red;
+  background-color: transparent;
+}
+
+.important {
+  width: 100%;
+  height: 100%;
+}
+
+.dayinput {
+  display: flex;
+  margin: 20px 0;
+  align-items: center;
+  justify-content: space-between;
+  width: 57%;
+}
+
+.allday {
+  display: none;
+  position: absolute;
+  margin: 50px;
+}
+
+.switch_label {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  width: 58px;
+  height: 28px;
+  background: #fff;
+  border: 2px solid #daa;
+  border-radius: 20px;
+  transition: 0.2s;
+}
+
+.switch_label:hover {
+  background: #efefef;
+}
+
+.onf_btn {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 20px;
+  background: #daa;
+  transition: 0.2s;
+}
+
+#checkbox:checked + .switch_label {
+  background: #c44;
+  border: 2px solid #c44;
+}
+
+#checkbox:checked + .switch_label:hover {
+  background: #e55;
+}
+
+#checkbox:checked + .switch_label .onf_btn {
+  left: 32px;
+  background: #fff;
+  box-shadow: 1px 2px 3px #00000020;
+}
+
+.select_wrap {
+  width: 100%;
+}
+
+.select_wrap select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path stroke="rgba(0,0,0,0.5)" stroke-width="2" d="M6 9l6 6 6-6"></path></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+}
+
+.select_wrap select option {
+  color: dimgray;
+  background-color: white;
+}
+
+/* 이벤트 모달 전체 화면 */
+.e_modal {
+  display: none; /* 초기에는 숨김 처리 */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.1); /* 배경은 반투명한 검은색 */
+}
+
+.e_modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+}
+
+/* 닫기 버튼 */
+.e_close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.e_close:hover,
+.e_close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
