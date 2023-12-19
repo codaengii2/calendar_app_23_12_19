@@ -119,8 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // 수정 버튼 클릭 시
       eventForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        // 수정된 내용을 가져와서 이벤트를 업데이트하는 코드 추가
-        // 이벤트 정보 업데이트 후 모달창 닫기
+
         eventModal.style.display = "none";
       });
 
