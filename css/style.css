@@ -14,6 +14,7 @@ body {
 }
 
 /* 전체 캘린더 틀 */
+
 #calendar {
   width: 60vw;
   margin-top: 50px;
@@ -22,6 +23,11 @@ body {
   padding: 50px 20px;
   height: 90vh;
   background-color: #fff;
+}
+@media screen and (max-width: 1280px) {
+  #calendar {
+    width: 80vw;
+  }
 }
 @media screen and (max-width: 960px) {
   #calendar {
@@ -130,6 +136,29 @@ body {
   font-size: 14px;
 }
 
+/* timegrid top scroller */
+.fc .fc-scrollgrid-section-header .fc-scroller {
+  overflow: unset !important;
+}
+
+/* timegrid middle scroller */
+.fc .fc-scrollgrid-section:first-child .fc-scroller {
+  overflow: unset !important;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 680px) {
+  /* event title */
+  .fc-event-title {
+    font-size: 14px;
+  }
+}
+
+/* event border color */
+.fc-h-event {
+  border: transparent;
+}
+
 /* 구름 및 배경 */
 .bg {
   position: fixed;
@@ -194,6 +223,20 @@ body {
 }
 
 /* 모달 */
+
+.back_modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+}
+
 .modal {
   /* border: 1px solid #ddd; */
   border-radius: 30px;
@@ -202,10 +245,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  z-index: 1;
-  display: none;
+  z-index: 2;
   overflow: hidden;
-  box-shadow: 5px 5px 5px #ddd;
 }
 
 .modal_header {
@@ -351,14 +392,17 @@ body {
 
 .select_wrap select {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 12.5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   appearance: none;
   background-image: url('data:image/svg+xml;utf8,<svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path stroke="rgba(0,0,0,0.5)" stroke-width="2" d="M6 9l6 6 6-6"></path></svg>');
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 15px;
+  font-family: "NanumSquareRound";
+  color: dimgray;
+  font-size: 14px;
 }
 
 .select_wrap select option {
@@ -375,8 +419,8 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.1); /* 배경은 반투명한 검은색 */
+  background-color: rgba(0, 0, 0, 0.5); /* 배경은 반투명한 검은색 */
+  backdrop-filter: blur(3px);
 }
 
 .e_modal-content {
