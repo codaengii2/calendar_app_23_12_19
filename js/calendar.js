@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //   // {description: "Lecture", department: "BioChemistry"}
     // },
     eventColor: "#AAEEFF", // event 색상
-    // eventDisplay: "list-item",
+    // eventDisplay: "list-item",/
 
     // eventContent: {
     //   html: `<div><i class="fa-solid fa-heart"></i></div>`,
@@ -137,6 +137,21 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         description: "코코",
       },
+      {
+        title: "학원 휴무",
+        start: "2023-12-22",
+        color: "#F24E4E",
+      },
+      {
+        title: "에약",
+        start: "2023-12-23",
+        color: "#FFCF33",
+      },
+      {
+        title: "크리스마스",
+        start: "2023-12-25",
+        color: "#F24E4E",
+      },
     ],
 
     dateClick: function (info) {
@@ -151,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
             start: info.dateStr,
             allDay: mySchAllday.checked,
             backgroundColor: mySchBColor.value || "#AAEEFF",
+            color: "#AAEEFF",
           };
           calendar.addEvent(event);
           // alert("일정 업로드 성공");

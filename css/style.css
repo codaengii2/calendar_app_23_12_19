@@ -194,6 +194,15 @@ body {
   flex-direction: row;
 }
 
+@media screen and (max-width: 480px) {
+  .fc-h-event .fc-event-title {
+    color: transparent;
+  }
+  .fc-direction-ltr .fc-daygrid-event .fc-event-time {
+    color: transparent;
+  }
+}
+
 /* 구름 및 배경 */
 .bg {
   position: fixed;
@@ -486,8 +495,8 @@ body {
   height: fit-content;
   font-weight: bold;
   position: absolute;
-  right: 40px;
-  top: 0;
+  right: 32px;
+  top: 20px;
 }
 
 .e_close:hover,
