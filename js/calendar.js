@@ -8,10 +8,12 @@ const mySchBColor = document.querySelector(".bgcolor");
 const plusEl = document.querySelector(".modal .con .plus");
 const closeEl = document.querySelector(".modal .close");
 const eventModal = document.getElementById("eventModal");
-const eventForm = document.getElementById("eventForm");
-const eventTitle = document.querySelector(".event_title");
-const deleteEventBtn = document.getElementById("deleteEventBtn");
 const eventClose = document.querySelector(".e_close");
+const eventForm = document.getElementById("eventForm");
+const eventTitleInput = document.getElementById("eventTitleInput");
+const updateEventBtn = document.getElementById("updateEventBtn");
+const deleteEventBtn = document.getElementById("deleteEventBtn");
+let currentEvent = null;
 
 document.addEventListener("DOMContentLoaded", function () {
   var calendarEl = document.getElementById("calendar");
@@ -48,25 +50,74 @@ document.addEventListener("DOMContentLoaded", function () {
     eventDurationEditable: true, //event 기간수정가능
     eventInteractive: true,
     timeZone: "UTC",
-    events: [
-      {
-        title: "산책",
-        start: "2023-12-13T10:30:00",
-        end: "2023-12-15T11:30:00",
-        extendedProps: {
-          department: "하루루틴",
-        },
-        description: "코코",
-      },
-    ],
-    // events: "../json/basic.json",
+    // eventSources: [
+    // {
+    //   url: "../basic.php",
+    //   method: "POST",
+    //   extraParams: function () {
+    //     return {
+    //       dynamic_value: Math.random(),
+    //     };
+    //   },
+    //   failure: function () {
+    //     alert("데이터 불러오기 실패");
+    //   },
+    // },
+    // {
+    //   url: "http://localhost:3000/posts",
+    //   method: "GET",
+    //   extraParams: function () {
+    //     return {
+    //       dynamic_value: Math.random(),
+    //     };
+    //   },
+    //   failure: function () {
+    //     alert("데이터 불러오기 실패");
+    //   },
+    // },
+    // {
+    //   url: "http://localhost:3000/comments",
+    //   method: "GET",
+    //   extraParams: function () {
+    //     return {
+    //       dynamic_value: Math.random(),
+    //     };
+    //   },
+    //   failure: function () {
+    //     alert("데이터 불러오기 실패");
+    //   },
+    // },
+    // {
+    //   url: "http://localhost:3000/profile",
+    //   method: "GET",
+    //   extraParams: function () {
+    //     return {
+    //       dynamic_value: Math.random(),
+    //     };
+    //   },
+    //   failure: function () {
+    //     alert("데이터 불러오기 실패");
+    //   },
+    // },
+    // {
+    //   url: "http://localhost:3000/holiday",
+    //   method: "GET",
+    //   extraParams: function () {
+    //     return {
+    //       dynamic_value: Math.random(),
+    //     };
+    //   },
+    //   failure: function () {
+    //     alert("데이터 불러오기 실패");
+    //   },
+    // },
+    // ],
     // eventDidMount: function (info) {
     //   // console.log(info.event.extendedProps);
     //   // {description: "Lecture", department: "BioChemistry"}
     // },
-    // eventColor: "red", // event 색상
+    eventColor: "#AAEEFF", // event 색상
     // eventDisplay: "list-item",
-    eventBorderColor: "transperant",
 
     // eventContent: {
     //   html: `<div><i class="fa-solid fa-heart"></i></div>`,
@@ -77,23 +128,29 @@ document.addEventListener("DOMContentLoaded", function () {
         title: "my event",
         start: "2023-12-20",
       },
+      {
+        title: "산책",
+        start: "2023-12-13T10:30:00",
+        end: "2023-12-15T11:30:00",
+        extendedProps: {
+          department: "하루루틴",
+        },
+        description: "코코",
+      },
     ],
 
     dateClick: function (info) {
       // mySchStart.textContent = info.dateStr;
-      modalEl.style.display = "block";
+
       const submitHandler = (event) => {
         event.preventDefault();
-        // var dateStrEnd = mySchEnd.value;
         var dateStart = new Date(info.dateStr + "T00:00:00");
-        // var dateEnd = new Date(dateStrEnd + "T00:00:00");
         if (!isNaN(dateStart.valueOf())) {
           var event = {
             title: mySchTitle.value,
             start: info.dateStr,
-            // end: mySchEnd.value || mySchStart.value,
             allDay: mySchAllday.checked,
-            backgroundColor: mySchBColor.value,
+            backgroundColor: mySchBColor.value || "#AAEEFF",
           };
           calendar.addEvent(event);
           // alert("일정 업로드 성공");
@@ -105,43 +162,70 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log("유효하지 않은 날짜입니다.");
         }
       };
-      formEl.addEventListener("submit", submitHandler);
+
       // 모달 닫기
-      closeEl.addEventListener("click", () => {
+      const closeHandler = () => {
         formEl.reset();
         formEl.removeEventListener("submit", submitHandler);
         modalEl.style.display = "none";
-      });
+      };
+      formEl.addEventListener("submit", submitHandler);
+
+      closeEl.addEventListener("click", closeHandler);
+
+      modalEl.style.display = "block";
     }, //날짜 클릭옵션
+
     eventClick: function (info) {
-      const eventId = info.event.id;
-      const event = document.getElementById(eventId);
+      // 이번에 클릭한 이벤트 앞에 다른 이벤트클릭이 있으면 모두 제거
+      if (currentEvent) {
+        updateEventBtn.removeEventListener("click", currentEvent.editHandler);
+        deleteEventBtn.removeEventListener("click", currentEvent.clickHandler);
+        eventClose.removeEventListener("click", currentEvent.closeHandler);
+      }
       eventModal.style.display = "block";
-
-      // 수정 버튼
-      eventForm.addEventListener("submit", function (e) {
+      const event = info.event;
+      const eventTitle = event.title;
+      eventTitleInput.value = eventTitle;
+      // 수정 버튼 클릭 시
+      const eventEditHandler = (e) => {
         e.preventDefault();
-        // event.setProp(name, value);
-
-        eventModal.style.display = "none";
-      });
-
-      // 삭제 버튼
-      deleteEventBtn.addEventListener("click", function () {
-        if (event) {
-          console.log(moment);
-          event.remove();
-          alert("이벤트 삭제 완료");
+        const newTitle = eventTitleInput.value;
+        if (newTitle !== eventTitle) {
+          event.setProp("title", newTitle);
+          alert("이벤트가 수정되었습니다.");
         } else {
-          alert("이벤트를 찾을 수 없음");
+          alert("수정된 내용이 없습니다.");
         }
+        // 모달 닫기
         eventModal.style.display = "none";
-      });
+      };
+      updateEventBtn.addEventListener("click", eventEditHandler);
 
-      // 모달창 닫기
-      eventClose.addEventListener("click", function () {
+      // 삭제 버튼 클릭 시
+      const eventClickHandler = () => {
+        if (confirm("정말로 이벤트를 삭제하시겠습니까?")) {
+          event.remove();
+          alert("이벤트가 삭제되었습니다.");
+        }
+        // 모달 닫기
         eventModal.style.display = "none";
-      });
+      };
+
+      deleteEventBtn.addEventListener("click", eventClickHandler);
+
+      // 모달 닫기 버튼 클릭 시
+      const eventCloseHandler = () => {
+        eventModal.style.display = "none";
+      };
+      eventClose.addEventListener("click", eventCloseHandler);
+
+      // currentEvent에 이벤트 리스너들 저장
+      currentEvent = {
+        editHandler: eventEditHandler,
+        clickHandler: eventClickHandler,
+        closeHandler: eventCloseHandler,
+      };
     },
   });
 
@@ -157,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // modalEl.style.display = "block";
   });
 
-  var event = calendar.getEventById("a"); // an event object!
-  var start = event.start; // a property (a Date object)
-  console.log(start.toISOString()); // "2018-09-01T00:00:00.000Z"
+  // var event = calendar.getEventById("a"); // an event object!
+  // var start = event.start; // a property (a Date object)
+  // console.log(start.toISOString()); // "2018-09-01T00:00:00.000Z"
 });
