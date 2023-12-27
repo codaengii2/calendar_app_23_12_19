@@ -20,9 +20,10 @@ body {
   margin-top: 50px;
   border-radius: 30px;
   overflow: hidden;
-  padding: 50px 20px;
+  padding: 30px 20px;
   height: 90vh;
   background-color: #fff;
+  position: relative;
 }
 @media screen and (max-width: 1280px) {
   #calendar {
@@ -32,7 +33,7 @@ body {
 @media screen and (max-width: 960px) {
   #calendar {
     width: 90vw;
-    height: 75vh;
+    height: 80vh;
     padding: 20px;
   }
 }
@@ -40,53 +41,85 @@ body {
 @media screen and (max-width: 600px) {
   #calendar {
     width: 90vw;
-    height: 60vh;
-    padding: 20px;
+    height: 70vh;
+    padding: 30px 20px;
   }
+}
+
+/* 일요일 */
+.fc-day-sun {
+  color: red;
 }
 
 /* 헤더 툴바 */
 .fc .fc-toolbar.fc-header-toolbar {
   padding: 0 50px;
+  margin-bottom: 30px;
 }
 
 @media screen and (max-width: 960px) {
   .fc .fc-toolbar.fc-header-toolbar {
-    padding: 0 20px;
-    margin-bottom: 10px;
+    padding: 0 40px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .fc .fc-toolbar.fc-header-toolbar {
     padding: 0 5px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
 /* 헤더툴바 버튼 */
 .fc .fc-button-primary {
-  background-color: transparent;
+  background-color: #ddd;
   border: 0;
-  color: black;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* 헤더툴바 버튼 */
+.fc .fc-button {
+  border-radius: 10px;
+  padding: 0.5em 0.9em;
 }
 
 /* 헤더툴바 버튼 호버 */
 .fc .fc-button-primary:hover {
-  background-color: transparent;
-  border: #fff;
+  background-color: rgb(199, 199, 199);
+  border-radius: 10px;
 }
 
-/* 헤더 연도 글자 */
+/* 헤더툴바 그림자 */
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+.fc .fc-button-primary:not(:disabled):active:focus {
+  box-shadow: none;
+}
+
+/* 헤더 툴바 타이틀 */
+.fc .fc-toolbar-title {
+  font-weight: 800;
+}
+.fc-header-toolbar .fc-toolbar-chunk:last-child .fc-button {
+  background-color: transparent !important;
+}
+
 @media screen and (max-width: 960px) {
   .fc .fc-toolbar-title {
-    font-size: 20px;
+    font-size: 24px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .fc .fc-toolbar-title {
-    font-size: 18px;
+    font-size: 22px;
+  }
+  .fc-header-toolbar .fc-toolbar-chunk:last-child {
+    position: absolute;
+    top: 30px;
+    right: 30px;
   }
 }
 
@@ -94,7 +127,7 @@ body {
 .fc .fc-button-primary span {
   font-weight: 500;
   font-size: 20px;
-  color: black;
+  color: #222;
 }
 
 .fc .fc-button-group {
@@ -107,14 +140,17 @@ body {
 }
 
 .fc .fc-button-group:hover {
-  background-color: transparent;
-  /* border: #fff; */
-  background-color: rgb(199, 199, 199);
-  border-radius: 5px;
+  background-color: #ddd;
+  border-radius: 10px;
 }
 
 .fc .fc-button-group:hover span {
   color: #000;
+}
+
+/* 요일 */
+.fc .fc-scroller-harness {
+  margin-bottom: 5px;
 }
 
 /* day별 글자 */
@@ -123,6 +159,16 @@ body {
   justify-content: center;
   margin-bottom: 3px;
   font-weight: 700;
+}
+
+@media screen and (max-width: 480px) {
+  .fc .fc-scroller-harness {
+    font-size: 14px;
+  }
+  .fc .fc-daygrid-day-top {
+    font-size: 12px;
+    font-weight: 300;
+  }
 }
 
 /* day 및 요일 감싸는 container */
@@ -163,6 +209,11 @@ body {
   z-index: 1;
 }
 
+.fc-event-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
 @media screen and (max-width: 680px) {
   /* event title */
   .fc-event-title {
@@ -176,17 +227,9 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-  .fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {
-    border-bottom-left-radius: 0.25em !important;
-    border-top-left-radius: 0.25em !important;
-  }
-  .fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {
-    border-bottom-right-radius: 0.25em !important;
-    border-top-right-radius: 0.25em !important;
-  }
   .fc .fc-button-group {
+    margin-top: 10px;
     font-size: 14px;
-    flex-direction: column;
   }
 }
 
@@ -210,7 +253,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #b5e2f9;
+  background-color: #a6dcf7;
   z-index: -1;
   overflow: hidden;
 }
@@ -218,20 +261,29 @@ body {
 .dog {
   width: 80px;
   position: absolute;
-  top: 3%;
+  top: 2%;
   right: 26%;
+}
+
+@media screen and (max-width: 1280px) {
+  .dog {
+    width: 80px;
+    position: absolute;
+    top: 2%;
+    right: 19%;
+  }
 }
 
 @media screen and (max-width: 960px) {
   .dog {
     right: 12%;
-    top: 11%;
+    top: 8%;
   }
 }
 @media screen and (max-width: 600px) {
   .dog {
     right: 15%;
-    top: 19%;
+    top: 14%;
   }
 }
 
@@ -291,6 +343,13 @@ body {
   background-color: #fff;
   z-index: 2;
   overflow: hidden;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 480px) {
+  .modal {
+    width: 90vw;
+  }
 }
 
 .modal_header {
@@ -341,7 +400,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 20px;
   margin-top: 30px;
+  color: #808080;
 }
 
 .addevent {
@@ -350,14 +411,14 @@ body {
   height: 37px;
   border-radius: 37px;
   /* border: 1px solid #000; */
-  background-color: #b5e2f9;
+  background-color: #a6dcf7;
   margin: 0 auto;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 30px;
-  margin-left: 20px;
+  color: #fff;
 }
 
 .fa-heart {
@@ -392,7 +453,7 @@ body {
   width: 58px;
   height: 28px;
   background: #fff;
-  border: 2px solid #daa;
+  border: 2px solid #c44;
   border-radius: 20px;
   transition: 0.2s;
 }
@@ -409,7 +470,7 @@ body {
   width: 18px;
   height: 18px;
   border-radius: 20px;
-  background: #daa;
+  background: #c44;
   transition: 0.2s;
 }
 
@@ -445,6 +506,7 @@ body {
   font-family: "NanumSquareRound";
   color: dimgray;
   font-size: 14px;
+  font-weight: 800;
 }
 
 .select_wrap select option {
@@ -463,6 +525,7 @@ body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* 배경은 반투명한 검은색 */
   backdrop-filter: blur(3px);
+  font-weight: 700;
 }
 
 .e_modal-content {
@@ -474,6 +537,12 @@ body {
   transform: translate(-50%, -50%);
   border-radius: 30px;
   overflow: hidden;
+}
+
+@media screen and (max-width: 480px) {
+  .e_modal-content {
+    width: 90vw;
+  }
 }
 
 .e_modal_header {
@@ -549,6 +618,7 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  color: #808080;
 }
 
 .eventBtn {
@@ -556,3 +626,11 @@ body {
   align-items: center;
   margin-top: 30px;
 }
+
+/* 하늘색 조금 진하고 어둡게(달력 가운데 집중) */
+/* 여백 타이트한 headertoolbar 여유롭게 */
+/* 모바일 사이즈 68vh title: 22px day: 12px (month/day) 떨어지게 */
+/* 모달창 뒤에 달력과 맞추기 */
+/* month/day 호버 전에도 색이 들어가게 */
+/* 이벤트 추가 버튼 color 흰 backcolor 배경과 같게 */
+/* 모달창 취소버튼 글자 808080 */

@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
         color: "#F24E4E",
       },
       {
-        title: "에약",
+        title: "케이크 예약",
         start: "2023-12-23",
         color: "#FFCF33",
       },
