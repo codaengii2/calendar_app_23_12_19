@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //   // console.log(info.event.extendedProps);
     //   // {description: "Lecture", department: "BioChemistry"}
     // },
-    eventColor: "#AAEEFF", // event 색상
+    // eventColor: "#AAEEFF", // event 색상
     // eventDisplay: "list-item",/
 
     // eventContent: {
@@ -435,8 +435,8 @@ document.addEventListener("DOMContentLoaded", function () {
             title: mySchTitle.value,
             start: info.dateStr,
             allDay: mySchAllday.checked,
-            backgroundColor: mySchBColor.value || "#AAEEFF",
-            color: "#AAEEFF",
+            backgroundColor: mySchBColor.value,
+            // color: "#AAEEFF",
           };
           calendar.addEvent(event);
           // alert("일정 업로드 성공");
