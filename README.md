@@ -1,23 +1,4 @@
-## 설치 목록
 
-- npm install --save @fullcalendar/react @fullcalendar/core @fullcalendar/daygrid @fullcalendar/interaction @fullcalendar/list
-
-- npm install style-loader css-loader sass-loader node-sass --save
-
-- npm i styled-components
-
-- npm install axios
-
-- npm install mssql
-
-- npm install @mui/material @emotion/react @emotion/styled
-
-- npm install @mui/material @mui/styled-engine-sc styled-components
-
-- npm install @fontsource/roboto
-  ("import '@fontsource/roboto/700.css';" 이런식으로 사용)
-
-- npm install @mui/icons-material
 
 ## 기획서
 
